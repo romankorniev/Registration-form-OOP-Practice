@@ -70,3 +70,32 @@ h4 {
     flex-direction: column;
     gap: 7px;
 }
+
+#registerd {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 80px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.windowRegistered {
+    flex: 1 1 calc(20% - 15px);
+    max-width: 250px;
+    min-width: 200px;
+    height: 400px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px grey;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    box-sizing: border-box;
+    justify-content: space-around;
+}
+
+.windowRegistered p {
+    margin: 5px 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 14px;
+}

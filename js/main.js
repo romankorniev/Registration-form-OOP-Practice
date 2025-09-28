@@ -2,6 +2,7 @@ const PROFFESION = document.getElementById('profession')
 const EXTRA_OPTIONS = document.getElementById('extraSelects')
 const REGISTRATION_BUTTON = document.getElementById('registerBtn')
 const FORM = document.getElementById('registrationForm')
+const REGISTERED_CONTAINER = document.getElementById('registerd')
 
 class Person {
     constructor(name, surname, dateOfBirth, cityOfLiving){
@@ -165,7 +166,7 @@ REGISTRATION_BUTTON.addEventListener('click', (e) => {
             const university = document.getElementById('university').value
             const educationDegree = document.getElementById('educationDegree').value
             const salaryDoctor = document.getElementById('salary').value;
-            personObj = new Doctor(NAME, SURNAME, DOB, CITY, yearsOfExperienceDoctor, specialization, university, educationDegree, salaryDoctor)
+            personOBJ = new Doctor(NAME, SURNAME, DOB, CITY, yearsOfExperienceDoctor, specialization, university, educationDegree, salaryDoctor)
             break;
 
         case "Teacher":
@@ -174,7 +175,7 @@ REGISTRATION_BUTTON.addEventListener('click', (e) => {
             const schoolEducationDegree = document.getElementById('schoolEducationDegree').value
             const subject = document.getElementById('subject').value
             const salaryTeacher = document.getElementById('salary').value
-            personObj = new Teacher(NAME, SURNAME, DOB, CITY, yearsOfExperienceTeacher, schoolName, schoolEducationDegree, subject, salaryTeacher)
+            personOBJ = new Teacher(NAME, SURNAME, DOB, CITY, yearsOfExperienceTeacher, schoolName, schoolEducationDegree, subject, salaryTeacher)
             break;
 
         case "SalesPerson":
@@ -182,9 +183,66 @@ REGISTRATION_BUTTON.addEventListener('click', (e) => {
             const yearsInSales = document.getElementById('yearsInSales').value
             const salesTarget = document.getElementById('salesTarget').value
             const salarySales = document.getElementById('salary').value
-            personObj = new SalesPerson(NAME, SURNAME, DOB, CITY, shopName, yearsInSales, salesTarget, salarySales)
+            personOBJ = new SalesPerson(NAME, SURNAME, DOB, CITY, shopName, yearsInSales, salesTarget, salarySales)
             break;
     }
 
-    console.log(personOBJ)
+    displayBlocks(personOBJ)
+
+    FORM.reset()
+    EXTRA_OPTIONS.innerHTML = ''
 })
+
+function displayBlocks(personOBJ){
+    const USERDIV = document.createElement('div')
+    USERDIV.classList.add('windowRegistered')
+
+    const fields = [
+        ["Ім'я", personOBJ.name],
+        ["Прізвище", personOBJ.surname],
+        ["Дата народження", personOBJ.dateOfBirth],
+        ["Місто", personOBJ.cityOfLiving],
+        ["Професія", personOBJ.constructor.name]
+    ]
+
+     switch(personOBJ.constructor.name) {
+        case "Driver":
+            fields.push(["Назва авто", personOBJ.carBrand])
+            fields.push(["Модель авто", personOBJ.carModel])
+            fields.push(["Стаж водіння", personOBJ.drivingExperience])
+            fields.push(["Категорія прав", personOBJ.licenseCategory])
+            fields.push(["Зарплата", personOBJ.salary])
+            break;
+
+        case "Doctor":
+            fields.push(["Роки досвіду", personOBJ.yearsOfExperience])
+            fields.push(["Спеціалізація", personOBJ.specialization])
+            fields.push(["Університет", personOBJ.university])
+            fields.push(["Ступінь освіти", personOBJ.educationDegree])
+            fields.push(["Зарплата", personOBJ.salary])
+            break;
+
+        case "Teacher":
+            fields.push(["Роки досвіду", personOBJ.yearsOfExperience])
+            fields.push(["Назва школи", personOBJ.schoolName])
+            fields.push(["Школа", personOBJ.schoolEducationDegree])
+            fields.push(["Предмет викладання", personOBJ.subject])
+            fields.push(["Зарплата", personOBJ.salary])
+            break;
+
+        case "SalesPerson":
+            fields.push(["Назва магазину", personOBJ.shopName])
+            fields.push(["Роки у торгівлі", personOBJ.yearsInSales])
+            fields.push(["Ціль продажів", personOBJ.salesTarget])
+            fields.push(["Зарплата", personOBJ.salary])
+            break
+    }
+
+     fields.forEach(([label, value]) => {
+        const p = document.createElement('p')
+        p.textContent = `${label}: ${value}`
+        USERDIV.appendChild(p)
+    })
+
+    REGISTERED_CONTAINER.appendChild(USERDIV)
+}
