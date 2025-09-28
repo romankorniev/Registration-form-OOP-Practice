@@ -140,4 +140,51 @@ PROFFESION.addEventListener('change', () =>{
 
 REGISTRATION_BUTTON.addEventListener('click', (e) => {
     e.preventDefault()
+
+    const NAME = document.getElementById('firstName').value
+    const SURNAME = document.getElementById('lastName').value
+    const DOB = document.getElementById('DoB').value
+    const CITY = document.getElementById('city').value
+    const profession = PROFFESION.value
+
+    let personOBJ
+    
+    switch(profession) {
+        case "Driver":
+            const carBrand = document.getElementById('carBrand').value
+            const carModel = document.getElementById('carModel').value
+            const drivingExperience = document.getElementById('drivingExperience').value
+            const licenseCategory = document.getElementById('licenseCategory').value
+            const salaryDriver = document.getElementById('salary').value
+            personOBJ = new Driver(NAME, SURNAME, DOB, CITY, carBrand, carModel, drivingExperience, licenseCategory, salaryDriver)
+            break;
+
+        case "Doctor":
+            const yearsOfExperienceDoctor = document.getElementById('yearsOfExperience').value
+            const specialization = document.getElementById('specialization').value
+            const university = document.getElementById('university').value
+            const educationDegree = document.getElementById('educationDegree').value
+            const salaryDoctor = document.getElementById('salary').value;
+            personObj = new Doctor(NAME, SURNAME, DOB, CITY, yearsOfExperienceDoctor, specialization, university, educationDegree, salaryDoctor)
+            break;
+
+        case "Teacher":
+            const yearsOfExperienceTeacher = document.getElementById('yearsOfExperience').value
+            const schoolName = document.getElementById('schoolName').value
+            const schoolEducationDegree = document.getElementById('schoolEducationDegree').value
+            const subject = document.getElementById('subject').value
+            const salaryTeacher = document.getElementById('salary').value
+            personObj = new Teacher(NAME, SURNAME, DOB, CITY, yearsOfExperienceTeacher, schoolName, schoolEducationDegree, subject, salaryTeacher)
+            break;
+
+        case "SalesPerson":
+            const shopName = document.getElementById('shopName').value
+            const yearsInSales = document.getElementById('yearsInSales').value
+            const salesTarget = document.getElementById('salesTarget').value
+            const salarySales = document.getElementById('salary').value
+            personObj = new SalesPerson(NAME, SURNAME, DOB, CITY, shopName, yearsInSales, salesTarget, salarySales)
+            break;
+    }
+
+    console.log(personOBJ)
 })
